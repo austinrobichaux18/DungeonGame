@@ -88,19 +88,19 @@ public class Dungeon
         var coord_y = CurrentRoom.Coord_y;
         if (move == PlayerMovement.North)
         {
-            coord_y++;
+            coord_x--;
         }
         else if (move == PlayerMovement.South)
         {
-            coord_y--;
+            coord_x++;
         }
         else if (move == PlayerMovement.East)
         {
-            coord_x++;
+            coord_y++;
         }
         else if (move == PlayerMovement.West)
         {
-            coord_x--;
+            coord_y--;
         }
 
         if (Rooms[coord_x, coord_y])
@@ -125,19 +125,19 @@ public class Room
         Coord_x = coord_x;
         Coord_y = coord_y;
 
-        if (Coord_y != Dungeon.MaxSize - 1)
+        if (Coord_x != 0)
         {
             DoorsAvailable.Add("N");
         }
-        if (Coord_y != 0)
+        if (Coord_x != Dungeon.MaxSize - 1)
         {
             DoorsAvailable.Add("S");
         }
-        if (Coord_x != Dungeon.MaxSize - 1)
+        if (Coord_y != Dungeon.MaxSize - 1)
         {
             DoorsAvailable.Add("E");
         }
-        if (Coord_x != 0)
+        if (Coord_y != 0)
         {
             DoorsAvailable.Add("W");
         }
