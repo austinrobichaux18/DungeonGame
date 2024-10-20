@@ -40,7 +40,38 @@ public class Dungeon
         }
         WinningRoom = (x, y);
     }
+    public void PrintMap()
+    {
+        int rows = Rooms.GetLength(0);
+        int cols = Rooms.GetLength(1);
 
+        // Print top border
+        Console.WriteLine(" " + new string('-', cols * 2 + 1));
+
+        // Iterate through the rows of the 2D array
+        for (int i = 0; i < rows; i++)
+        {
+            Console.Write("|"); // Start each row with a vertical bar
+                                // Iterate through the columns of the 2D array
+            for (int j = 0; j < cols; j++)
+            {
+                if (i == CurrentRoom.Coord_x && j == CurrentRoom.Coord_y)
+                {
+                    // Print 'O' for the current room
+                    Console.Write("O ");
+                }
+                else
+                {
+                    // If the value is true, print 'X', else print an empty space
+                    Console.Write(Rooms[i, j] ? "X " : "  ");
+                }
+            }
+            Console.WriteLine("|"); // End each row with a vertical bar
+        }
+
+        // Print bottom border
+        Console.WriteLine(" " + new string('-', cols * 2 + 1));
+    }
     private void SetDescriptions()
     {
         var assemblyPath = Assembly.GetExecutingAssembly().Location;

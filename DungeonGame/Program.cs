@@ -20,6 +20,8 @@ public class Program
                 Console.WriteLine("Total Rooms Created: " + dungeon.AllRooms.Count);
                 Console.WriteLine("Doors availble to enter: " + string.Join(",", dungeon.CurrentRoom.DoorsAvailable));
                 Console.WriteLine(dungeon.CurrentRoom.Description);
+                dungeon.PrintMap();
+
                 var playerMove = Console.ReadLine();
 
                 if (playerMove == "0")
