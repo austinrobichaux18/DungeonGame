@@ -12,7 +12,11 @@ public class Dungeon
     public (int x, int y) WinningRoom { get; private set; }
     public List<string>? AllDescriptions { get; private set; }
 
-    public static int MaxSize = 10;
+    public int MaxSize => Level * 2 + 1;
+    public int Level { get; set; }
+
+    public Dungeon(int level) => Level = level;
+
     public void Initialize()
     {
         SetDescriptions();
@@ -26,7 +30,8 @@ public class Dungeon
                 Rooms[i, j] = false;
             }
         }
-        CurrentRoom = new Room(MaxSize / 2, MaxSize / 2, AllDescriptions[new Random().Next(AllDescriptions.Count) - 1]);
+        var decriptionCount = new Random().Next(AllDescriptions.Count) - 1;
+        CurrentRoom = new Room(MaxSize / 2, MaxSize / 2, AllDescriptions[decriptionCount >= 0 ? decriptionCount : 0], MaxSize);
 
         Rooms[MaxSize / 2, MaxSize / 2] = true;
         AllRooms.Add(CurrentRoom);
@@ -115,7 +120,7 @@ public class Dungeon
         }
         else
         {
-            CurrentRoom = new Room(coord_x, coord_y, AllDescriptions[new Random().Next(AllDescriptions.Count - 1)]);
+            CurrentRoom = new Room(coord_x, coord_y, AllDescriptions[new Random().Next(AllDescriptions.Count - 1)], MaxSize);
 
             Rooms[coord_x, coord_y] = true;
             AllRooms.Add(CurrentRoom);
@@ -126,7 +131,7 @@ public class Dungeon
 }
 public class Room
 {
-    public Room(int coord_x, int coord_y, string description)
+    public Room(int coord_x, int coord_y, string description, int dungeonSize)
     {
         Coord_x = coord_x;
         Coord_y = coord_y;
@@ -134,22 +139,18 @@ public class Room
         if (Coord_x != 0)
         {
             DoorsAvailable.Add("W");
-            DoorsAvailable.Add("w");
-        }
-        if (Coord_x != Dungeon.MaxSize - 1)
-        {
-            DoorsAvailable.Add("S");
-            DoorsAvailable.Add("s");
-        }
-        if (Coord_y != Dungeon.MaxSize - 1)
-        {
-            DoorsAvailable.Add("D");
-            DoorsAvailable.Add("d");
         }
         if (Coord_y != 0)
         {
             DoorsAvailable.Add("A");
-            DoorsAvailable.Add("a");
+        }
+        if (Coord_x != dungeonSize - 1)
+        {
+            DoorsAvailable.Add("S");
+        }
+        if (Coord_y != dungeonSize - 1)
+        {
+            DoorsAvailable.Add("D");
         }
         Description = description;
     }
@@ -158,8 +159,8 @@ public class Room
     public int Coord_y { get; set; }
     public List<string> DoorsAvailable { get; set; } = new List<string>();
     public string Name => Coord_x + "." + Coord_y;
-    public string Content { get; set; } //layout, mobs, etc...
     public string Description { get; set; }
+    public string Content { get; set; } //layout, mobs, etc...
 }
 public enum PlayerMovement
 {

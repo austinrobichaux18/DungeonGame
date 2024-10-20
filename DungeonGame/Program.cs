@@ -6,14 +6,16 @@ public class Program
 {
     public static void Main(string[] args)
     {
+        var level = 1;
         while (true)
         {
-            var dungeon = new Dungeon();
+            var dungeon = new Dungeon(level);
             dungeon.Initialize();
 
             Console.WriteLine("Welcome to the Dungeon!");
-            Console.WriteLine("Enter N, S, E, W to move North/South/East/West! Enter 0 to Reset the dungeon.");
+            Console.WriteLine("Enter W, A, S, D to move North/South/East/West! Enter 0 to Reset the dungeon.");
             Console.WriteLine("One room has a GOLDEN APPLE in it at random. Find that room, and you win the game!");
+            Console.WriteLine("Level: " + level);
             while (true)
             {
                 Console.WriteLine("You are in Room: " + dungeon.CurrentRoom.Name);
@@ -22,36 +24,39 @@ public class Program
                 Console.WriteLine(dungeon.CurrentRoom.Description);
                 dungeon.PrintMap();
 
-                var playerMove = Console.ReadLine();
-
-                if (playerMove == "0")
+                var playerMove = Console.ReadKey();
+                Console.WriteLine();
+                if (playerMove.KeyChar == '0')
                 {
                     break;
                 }
-                if (playerMove.Length != 1 || !dungeon.CurrentRoom.DoorsAvailable.Contains(playerMove))
+                var availbleDoors = dungeon.CurrentRoom.DoorsAvailable.Union(dungeon.CurrentRoom.DoorsAvailable.Select(x => x.ToLower()));
+                if (/*playerMove.Length != 1 ||*/ !availbleDoors.Contains(playerMove.KeyChar.ToString()))
                 {
                     Console.WriteLine("INVALID INPUT. Enter valid input");
                     Console.WriteLine();
                     continue;
                 }
 
-                var wins = dungeon.PlayerMove(ConvertToPlayerMovement(playerMove));
+                var wins = dungeon.PlayerMove(ConvertToPlayerMovement(playerMove.KeyChar.ToString()));
                 if (wins)
                 {
                     Console.WriteLine("CONGRADULATIONS!! You found the apple!");
                     Console.WriteLine("Final Map:");
                     dungeon.PrintMap();
 
-                    Console.WriteLine("Play Again? 1 for yes");
-                    var input = Console.ReadLine();
-                    if (input == "1")
+                    while (true)
                     {
-                        break;
+                        Console.WriteLine("Go to next level? W for yes.");
+                        var input = Console.ReadKey();
+                        Console.WriteLine();
+                        if (input.KeyChar == 'W' || input.KeyChar == 'w')
+                        {
+                            level++;
+                            break;
+                        }
                     }
-                    else
-                    {
-                        Environment.Exit(0);
-                    }
+                    break;
                 }
                 Console.WriteLine();
             }
