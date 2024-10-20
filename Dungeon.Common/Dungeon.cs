@@ -133,8 +133,8 @@ public class Room
 
         if (Coord_x != 0)
         {
-            DoorsAvailable.Add("N");
-            DoorsAvailable.Add("n");
+            DoorsAvailable.Add("W");
+            DoorsAvailable.Add("w");
         }
         if (Coord_x != Dungeon.MaxSize - 1)
         {
@@ -143,13 +143,13 @@ public class Room
         }
         if (Coord_y != Dungeon.MaxSize - 1)
         {
-            DoorsAvailable.Add("E");
-            DoorsAvailable.Add("e");
+            DoorsAvailable.Add("D");
+            DoorsAvailable.Add("d");
         }
         if (Coord_y != 0)
         {
-            DoorsAvailable.Add("W");
-            DoorsAvailable.Add("w");
+            DoorsAvailable.Add("A");
+            DoorsAvailable.Add("a");
         }
         Description = description;
     }

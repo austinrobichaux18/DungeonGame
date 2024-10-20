@@ -10,22 +10,17 @@ In this game, the player is placed in a dungeon made up of rooms, and they must 
 
 1. Run the console application.  
 2. You will start in a random room of the dungeon.  
-3. Use the following commands to move:  
-   - `N`: Move North  
-   - `S`: Move South  
-   - `E`: Move East  
-   - `W`: Move West  
-4. The goal is to explore the dungeon and find the **Golden Apple**.  
-5. When you find the Golden Apple, you win!  
+3. The goal is to explore the dungeon and find the **Golden Apple**.  
+4. When you find the Golden Apple, you win!  
 
 ## Controls
 
 | Command  | Action         |  
 |----------|----------------|  
-| `N` | Move North     |  
+| `W` | Move North     |  
 | `S` | Move South     |  
-| `E` | Move East      |  
-| `W` | Move West      |  
+| `A` | Move East      |  
+| `D` | Move West      |  
 
 ## Installation and Running the Game
 

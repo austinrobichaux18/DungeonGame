@@ -62,16 +62,16 @@ public class Program
     {
         switch (direction.ToUpper())
         {
-            case "N":
+            case "W":
                 return PlayerMovement.North;
             case "S":
                 return PlayerMovement.South;
-            case "E":
+            case "D":
                 return PlayerMovement.East;
-            case "W":
+            case "A":
                 return PlayerMovement.West;
             default: //impossble
-                throw new ArgumentException("Invalid direction. Please enter N, S, E, or W.");
+                throw new ArgumentException("Invalid direction. Please enter W, S, A, or D.");
         }
     }
 }
