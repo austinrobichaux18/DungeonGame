@@ -39,9 +39,20 @@ public class Program
                 if (wins)
                 {
                     Console.WriteLine("CONGRADULATIONS!! You found the apple!");
-                    break;
-                }
+                    Console.WriteLine("Final Map:");
+                    dungeon.PrintMap();
 
+                    Console.WriteLine("Play Again? 1 for yes");
+                    var input = Console.ReadLine();
+                    if (input == "1")
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        Environment.Exit(0);
+                    }
+                }
                 Console.WriteLine();
             }
             Console.WriteLine();

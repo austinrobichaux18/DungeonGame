@@ -57,8 +57,14 @@ public class Dungeon
             {
                 if (i == CurrentRoom.Coord_x && j == CurrentRoom.Coord_y)
                 {
-                    // Print 'O' for the current room
-                    Console.Write("O ");
+                    if (CurrentRoom.Coord_x == WinningRoom.x && CurrentRoom.Coord_y == WinningRoom.y)
+                    {
+                        Console.Write("A ");
+                    }
+                    else
+                    {
+                        Console.Write("O ");
+                    }
                 }
                 else
                 {
@@ -109,7 +115,7 @@ public class Dungeon
         }
         else
         {
-            CurrentRoom = new Room(coord_x, coord_y, AllDescriptions[new Random().Next(AllDescriptions.Count) - 1]);
+            CurrentRoom = new Room(coord_x, coord_y, AllDescriptions[new Random().Next(AllDescriptions.Count - 1)]);
 
             Rooms[coord_x, coord_y] = true;
             AllRooms.Add(CurrentRoom);
@@ -128,18 +134,22 @@ public class Room
         if (Coord_x != 0)
         {
             DoorsAvailable.Add("N");
+            DoorsAvailable.Add("n");
         }
         if (Coord_x != Dungeon.MaxSize - 1)
         {
             DoorsAvailable.Add("S");
+            DoorsAvailable.Add("s");
         }
         if (Coord_y != Dungeon.MaxSize - 1)
         {
             DoorsAvailable.Add("E");
+            DoorsAvailable.Add("e");
         }
         if (Coord_y != 0)
         {
             DoorsAvailable.Add("W");
+            DoorsAvailable.Add("w");
         }
         Description = description;
     }
@@ -149,7 +159,7 @@ public class Room
     public List<string> DoorsAvailable { get; set; } = new List<string>();
     public string Name => Coord_x + "." + Coord_y;
     public string Content { get; set; } //layout, mobs, etc...
-    public string Description { get; set; } //layout, mobs, etc...
+    public string Description { get; set; }
 }
 public enum PlayerMovement
 {
