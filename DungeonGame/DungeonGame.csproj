@@ -8,6 +8,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="RoomDescriptions.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="RoomDescriptions.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Dungeon.Common\DungeonGame.Common.csproj" />
   </ItemGroup>
 

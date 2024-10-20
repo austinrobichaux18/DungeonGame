@@ -19,6 +19,7 @@ public class Program
                 Console.WriteLine("You are in Room: " + dungeon.CurrentRoom.Name);
                 Console.WriteLine("Total Rooms Created: " + dungeon.AllRooms.Count);
                 Console.WriteLine("Doors availble to enter: " + string.Join(",", dungeon.CurrentRoom.DoorsAvailable));
+                Console.WriteLine(dungeon.CurrentRoom.Description);
                 var playerMove = Console.ReadLine();
 
                 if (playerMove == "0")
@@ -38,9 +39,9 @@ public class Program
                     Console.WriteLine("CONGRADULATIONS!! You found the apple!");
                     break;
                 }
+
                 Console.WriteLine();
             }
-            Console.WriteLine("Dungeon Completed!");
             Console.WriteLine();
         }
     }
